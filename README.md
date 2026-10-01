@@ -184,7 +184,7 @@ git push --follow-tags
 - 标签必须和 `package.json` 的 version 一致，否则发布失败。
 - 版本号带 `-`（如 `0.2.0-rc.1`）时发到 npm 的 `next` 标签，不覆盖 `latest`。
 - 这个版本已经在 npm 上时，跳过发布。
-- 需要在仓库 Settings → Secrets and variables → Actions 里配置 `NPM_TOKEN`（npm 的 Automation 或 Granular token，要有这个包的发布权限）。
+- 认证走 npm Trusted Publishing，不需要 token：在 npm 包设置的 Trusted Publisher 里登记仓库 `YIYuNCU/DSH-Reasoning-Effort` 和 workflow 文件 `publish.yml`。
 
 </details>
 

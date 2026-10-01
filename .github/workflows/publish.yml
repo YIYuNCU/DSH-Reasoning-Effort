@@ -8,7 +8,7 @@ on:
 
 permissions:
   contents: write # 创建 GitHub Release
-  id-token: write # npm provenance 签名
+  id-token: write # npm Trusted Publishing（OIDC）与 provenance 签名
 
 concurrency:
   group: publish
@@ -20,10 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 走 npm Trusted Publishing（OIDC），不需要 NPM_TOKEN。
+      # 不设 registry-url：setup-node 会写入带 NODE_AUTH_TOKEN 的 .npmrc，顶掉 OIDC 认证。
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: https://registry.npmjs.org
+
+      # Trusted Publishing 需要 npm >= 11.5.1，Node 22 自带的是 npm 10
+      - run: npm install -g npm@11.6.2
 
       - name: Check tag matches package.json version
         if: startsWith(github.ref, 'refs/tags/')
@@ -56,9 +60,7 @@ jobs:
             *-*) TAG=next ;;
             *)   TAG=latest ;;
           esac
-          npm publish --provenance --access public --tag "$TAG"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          npm publish --provenance --access public --tag "$TAG" --registry https://registry.npmjs.org
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/') && steps.check.outputs.skip != 'true'
