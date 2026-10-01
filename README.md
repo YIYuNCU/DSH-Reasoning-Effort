@@ -1,4 +1,4 @@
-# dsh-desktop-ui-reasoning-effort
+# <img src="icon.svg" width="32" height="32" alt="" align="top"> dsh-desktop-ui-reasoning-effort
 
 在 DSH 里接入第三方模型服务（比如 OpenAI 兼容的中转站、Anthropic 兼容接口）后，模型选择器里没有「思考强度」可选，GPT、Claude 这些明明支持思考的模型也只能用默认档位。这个插件在 **设置 → 模型** 里补上思考强度的配置，并给常见模型准备好推荐档位，点一下就能用。
 

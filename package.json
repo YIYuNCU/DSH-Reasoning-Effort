@@ -1,6 +1,6 @@
 {
   "name": "dsh-desktop-ui-reasoning-effort",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DSH plugin: configure per-model reasoning effort levels for custom pi-ai providers in the Models settings page, with presets for GPT, Claude, Grok, GLM and MiMo models.",
   "keywords": [
     "dsh",
@@ -11,6 +11,7 @@
   ],
   "type": "module",
   "main": "lib/index.js",
+  "icon": "./icon.svg",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "lib",
     "scripts",
     "cordis.patch.yml",
+    "icon.svg",
     "README.md",
     "LICENSE"
   ],
@@ -34,6 +36,7 @@
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
     "./cordis.patch.yml": "./cordis.patch.yml",
+    "./icon.svg": "./icon.svg",
     "./package.json": "./package.json"
   },
   "dsh": {
