@@ -12,6 +12,14 @@
   "type": "module",
   "main": "lib/index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YIYuNCU/DSH-Reasoning-Effort.git"
+  },
+  "homepage": "https://github.com/YIYuNCU/DSH-Reasoning-Effort#readme",
+  "bugs": {
+    "url": "https://github.com/YIYuNCU/DSH-Reasoning-Effort/issues"
+  },
   "files": [
     "lib",
     "scripts",
