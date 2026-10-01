@@ -1,4 +1,4 @@
-# dsh-reasoning-effort
+# dsh-desktop-ui-reasoning-effort
 
 在 DSH 里接入第三方模型服务（比如 OpenAI 兼容的中转站、Anthropic 兼容接口）后，模型选择器里没有「思考强度」可选，GPT、Claude 这些明明支持思考的模型也只能用默认档位。这个插件在 **设置 → 模型** 里补上思考强度的配置，并给常见模型准备好推荐档位，点一下就能用。
 
@@ -29,12 +29,20 @@
 
 支持 GPT、Claude、Grok、GLM、MiMo 系列的推荐预设，其他模型也可以自己勾选档位。
 
+> npm 上另有一个名字相近的 `dsh-reasoning-effort`，那是另一个作者的插件：它会在后台自动给所有模型填上统一的五个档位。两者写的是同一处配置，不建议同时安装。
+
 <a id="install"></a>
 ## 安装
 
 用 DSH 自带的命令行安装，`dsh.cmd` 在 DSH 安装目录的 `resources\runtime\cli\bin\` 下。
 
-**从 GitHub 安装**（推荐）：
+**从 npm 安装**（推荐）：
+
+```bat
+dsh.cmd plugin --profile desktop add dsh-desktop-ui-reasoning-effort
+```
+
+**从 GitHub 安装**：拿到 main 分支上的最新代码。
 
 ```bat
 dsh.cmd plugin --profile desktop add github:YIYuNCU/DSH-Reasoning-Effort
@@ -52,12 +60,12 @@ dsh.cmd plugin --profile desktop add link:<克隆下来的目录>
 如果重启后还是看不到面板，多半是插件没被选进 profile 的插件列表，补跑一次：
 
 ```bat
-node "%USERPROFILE%\.dsh\profiles\desktop\node_modules\dsh-reasoning-effort\scripts\enable-bundle.mjs" desktop
+node "%USERPROFILE%\.dsh\profiles\desktop\node_modules\dsh-desktop-ui-reasoning-effort\scripts\enable-bundle.mjs" desktop
 ```
 
 然后再重启。
 
-**更新**：从 GitHub 安装的，再跑一次同样的 `add` 命令，然后重启。从本机目录安装的，在目录里 `git pull`，然后重启。
+**更新**：从 npm 或 GitHub 安装的，再跑一次同样的 `add` 命令，然后重启。从本机目录安装的，在目录里 `git pull`，然后重启。
 
 <a id="use-it"></a>
 ## 怎么用
@@ -118,8 +126,8 @@ node "%USERPROFILE%\.dsh\profiles\desktop\node_modules\dsh-reasoning-effort\scri
 
 打开 `%USERPROFILE%\.dsh\profiles\desktop\package.json`：
 
-1. 从 `dependencies` 和 `dsh.profile.bundles` 里删掉 `dsh-reasoning-effort`；
-2. 删掉同目录 `node_modules` 下的 `dsh-reasoning-effort` 联接；
+1. 从 `dependencies` 和 `dsh.profile.bundles` 里删掉 `dsh-desktop-ui-reasoning-effort`；
+2. 删掉同目录 `node_modules` 下的 `dsh-desktop-ui-reasoning-effort` 联接；
 3. 重启 DSH。
 
 已经保存的思考强度留在模型配置里，卸载后照样生效。想去掉的话，卸载前先把模型改回「未设置」。
@@ -161,6 +169,22 @@ node test/client.test.mjs
 - 模型名变体和新版本号能正确识别；
 - 写入操作和冲突重试符合预期；
 - 面板的渲染和交互正常。
+
+### 发布
+
+推送到 main 或提 PR 时，[CI](.github/workflows/ci.yml) 会在 Node 20 / 22 上跑测试，并检查打包内容。
+
+发版本时推一个 `v*` 标签，[Publish](.github/workflows/publish.yml) 会跑测试、发布到 npm（带 provenance），再创建 GitHub Release：
+
+```bat
+npm version patch
+git push --follow-tags
+```
+
+- 标签必须和 `package.json` 的 version 一致，否则发布失败。
+- 版本号带 `-`（如 `0.2.0-rc.1`）时发到 npm 的 `next` 标签，不覆盖 `latest`。
+- 这个版本已经在 npm 上时，跳过发布。
+- 需要在仓库 Settings → Secrets and variables → Actions 里配置 `NPM_TOKEN`（npm 的 Automation 或 Granular token，要有这个包的发布权限）。
 
 </details>
 

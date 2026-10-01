@@ -9,7 +9,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 
-const NAME = 'dsh-reasoning-effort'
+const NAME = 'dsh-desktop-ui-reasoning-effort'
 const profile = process.argv[2] ?? 'desktop'
 const home = process.env.DSH_HOME || path.join(os.homedir(), '.dsh')
 const file = path.join(home, 'profiles', profile, 'package.json')

@@ -1,5 +1,5 @@
 {
-  "name": "dsh-reasoning-effort",
+  "name": "dsh-desktop-ui-reasoning-effort",
   "version": "0.1.0",
   "description": "DSH plugin: configure per-model reasoning effort levels for custom pi-ai providers in the Models settings page, with presets for GPT, Claude, Grok, GLM and MiMo models.",
   "keywords": [

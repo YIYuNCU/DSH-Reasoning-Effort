@@ -1,5 +1,5 @@
-# dsh-reasoning-effort: DSH bundle patch.
+# dsh-desktop-ui-reasoning-effort: DSH bundle patch.
 # Inserts this package as one Loader entry so its browser half (lib/client.js) is served.
 - insert:
-    - id: dsh-reasoning-effort
-      name: dsh-reasoning-effort
+    - id: dsh-desktop-ui-reasoning-effort
+      name: dsh-desktop-ui-reasoning-effort

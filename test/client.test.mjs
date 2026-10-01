@@ -57,7 +57,7 @@ const requireStub = (spec) => {
 let record = null
 const fakeWindow = { __ModuleLoader__: { load: (entry) => (record = entry) } }
 new Function('window', clientSrc)(fakeWindow)
-assert.equal(record.id, 'dsh-reasoning-effort', 'module id is the package name')
+assert.equal(record.id, 'dsh-desktop-ui-reasoning-effort', 'module id is the package name')
 const mod = record.factory(requireStub)
 const { LEVELS, normalizeModelId, presetFor, effortsEqual, classify, computeOps, commitChanges, ReasoningPanel, ProviderCardReasoning } = mod.__test
 
@@ -82,7 +82,7 @@ await test('requires only baseline modules', () => {
 })
 
 await test('module face and slot registration', () => {
-  assert.equal(mod.name, 'dsh-reasoning-effort')
+  assert.equal(mod.name, 'dsh-desktop-ui-reasoning-effort')
   assert.deepEqual(mod.inject, ['slots', 'locale', 'remote', 'remote.settings', 'configForms'])
   const registrations = []
   const locales = []
@@ -101,14 +101,14 @@ await test('module face and slot registration', () => {
     },
   })
   assert.equal(ensured, 1)
-  assert.deepEqual(locales.map((entry) => entry.ns), ['reasoningEffort'])
+  assert.deepEqual(locales.map((entry) => entry.ns), ['desktopUiReasoningEffort'])
   assert.deepEqual(Object.keys(locales[0].dict.zh).sort(), Object.keys(locales[0].dict.en).sort(), 'zh/en have the same keys')
   assert.equal(registrations.length, 1)
   const [{ name, entry }] = registrations
   assert.equal(name, 'settings.models.provider-card')
   assert.equal(entry.spec.name, 'settings.models.provider-card')
   assert.equal(entry.spec.key, 'llm-pi-ai')
-  assert.equal(entry.spec.locale, 'reasoningEffort')
+  assert.equal(entry.spec.locale, 'desktopUiReasoningEffort')
   const injected = entry.spec.inject()
   assert.equal(typeof injected.commitReasoning, 'function')
   assert.equal(injected.settingsSource.getSnapshot().status, 'idle')
